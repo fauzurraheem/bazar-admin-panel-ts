@@ -72,7 +72,10 @@ const Navbar = () => {
         <h1 className='text-2xl text-center text-emerald-500 hidden lg:block cursor-pointer'>FALZ-STORE</h1>
       </Link>
       <div className='relative'>
+        <Link href={'/shops/create'}>
         <button className='bg-emerald-600 font-semibold w-32 py-2 text-gray-50 rounded-md mr-4'>Create Shop</button>
+        </Link>
+        
         <Dropdown overlay={menu} placement={'bottomLeft'} trigger={['click']} overlayClassName=' max-w-[250px] left-0 rounded-md overflow-hidden shadow bg-white absolute'>
         <img className="inline-block h-10 w-10 rounded-full ring-2 ring-white"  src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
         </Dropdown>

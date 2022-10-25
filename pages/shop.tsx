@@ -14,7 +14,7 @@ const Shop = () => {
 
 
   return (
-    <div className='pt-16 lg:pl-96 w-full h-screen overflow-y-auto bg-gray-100'>
+    <div className='pt-16 lg:pl-96 w-full h-full '>
       <div className='p-8 w-full'>
         <div className='flex justify-between flex-col md:flex-row items-center  bg-white rounded-md h-40 p-6 shadow '>
           <h1 className='font-medium text-2xl'>Shop</h1>

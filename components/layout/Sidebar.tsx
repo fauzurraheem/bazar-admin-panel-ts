@@ -22,6 +22,9 @@ import {MdOutlineReviews} from 'react-icons/md'
 import {AiOutlineGift} from 'react-icons/ai'
 import {AiOutlineSetting} from 'react-icons/ai'
 import { useRouter } from 'next/router'
+import { auth } from '../../firebase.config'
+import { UserOutlined } from '@ant-design/icons';
+import { Avatar } from 'antd';
 
 
 
@@ -29,13 +32,13 @@ import { useRouter } from 'next/router'
 
 const Sidebar = () => {
   const {pathname} = useRouter()
-  console.log(pathname)
+  console.log(auth.currentUser)
 
 
   return (
-    <section className={`${pathname === '/login' && 'hidden'} ${pathname !== '/login' && 'lg:block'}  h-screen pt-16 w-96 bg-white overflow-y-auto fixed  px-4 bottom-0 hidden`}>
-      <div>
-        {pathname !== '/kdoedkoe' && (
+    <section className={`${pathname === '/login' && 'hidden'} ${pathname !== '/login' && 'lg:block'}  h-screen pt-16 w-96 bg-white overflow-y-auto fixed  px-4 bottom-0 hidden shadow-md `}>
+      <div className={`${pathname === '/shops/create' && ''}`}>
+        {pathname !== '/shops/create' && (
             <ul>
             <Link href={'/'}>
               <li className='flex items-center text-lg active:text-emerald-500 cursor-pointer text-gray-700 py-4'>
@@ -167,10 +170,19 @@ const Sidebar = () => {
             </Link>
           </ul>
         )}
-        {pathname === '/ghffhf' && (
-          <h1>hii</h1>
+        {pathname === '/shops/create' && (
+          <div className='flex flex-col items-center justify-center pt-20 text-gray-400 space-y-3'>
+            <Avatar size={100} icon={<UserOutlined />} />
+            <div className='text-center '>
+              <p className='text-base m-0 text-gray-600 font-medium'>{auth.currentUser?.displayName}Customer</p>
+              <p className='text-base m-0'>{auth.currentUser?.email}</p>
+              <p className='text-base m-0'>{}</p>
+            </div>
+            <div className='border border-gray-300 rounded py-2 px-4'>disabled</div>
+          </div>
         )}
       </div>
+      
       
     </section>
   )
