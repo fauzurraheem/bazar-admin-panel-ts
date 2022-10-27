@@ -2,23 +2,69 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import  { useState } from 'react'
 import {BsCloudUploadFill} from 'react-icons/bs'
-import {FiEye} from 'react-icons/fi'
-import {FiEyeOff} from 'react-icons/fi'
-import { Info, Password } from '../profile'
+
+
+
+type Info = {
+  name:string,
+  contact:string,
+  description:string,
+  accountHolderName:string,
+  accountHolderEmail:string,
+  bankName:string,
+  accountNumber:string,
+  country:string,
+  city:string,
+  state:string,
+  zip:string,
+  streetAddress:string,
+  website:string
+}
 
 
 const Create = () => {
   const {pathname} = useRouter()
   const [image, setImage] = useState('')
   const [show, setShow] = useState(false)
-  const [infoForm, setInfoForm] = useState({name:'', contact:'',bio:'',AccountHolderName:'',AccountHolderEmail:'',BankName:'',AccountNumber:'',country:'',city:'',state:'',})
-  const {name, contact} = infoForm
-  const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files)
-    if (e.target.files && e.target.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
+  const [infoForm, setInfoForm] = useState<Info>({
+  name:'',
+  contact:'',
+  description:'',
+  accountHolderName:'',
+  accountHolderEmail:'',
+  bankName:'',
+  accountNumber:'',
+  country:'',
+  city:'',
+  state:'',
+  zip:'',
+  streetAddress:'',
+  website:''
+  })
+
+
+  const {
+    name,
+    contact,
+    accountHolderName,
+    accountHolderEmail,
+    bankName,
+    accountNumber,
+    country,
+    city,
+    state,
+    zip,
+    website} = infoForm
+
+
+
+
+    const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log(e.target.files)
+      if (e.target.files && e.target.files[0]) {
+        setImage(URL.createObjectURL(e.target.files[0]));
+      }
     }
-   }
 
 
   const InfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +89,7 @@ const Create = () => {
     //   bio:''
     // })
   }
+  console.log(image)
 
 
 
@@ -54,7 +101,7 @@ const Create = () => {
 
   return (
     <div className='pt-16 lg:pl-96 w-full h-full text-gray-500  text-base'>
-      <div className='p-4 sm:p-8'>
+      <form className='p-4 sm:p-8' onSubmit={InfoSubmit}>
         <h1 className='text-2xl text-gray-600 my-6'>Create Shop</h1>
         <hr className=' border-dashed border-gray-300'/>
         <div className='flex sm:flex-row  flex-col w-full my-8  '>
@@ -118,9 +165,9 @@ const Create = () => {
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
                 <label  className='font-medium text-base'>Description</label>
-                <textarea rows={4} name="bio"  className='border border-gray-300 rounded outline-none py-2 px-2 focus:border-emerald-500'  onChange={(e) => {setInfoForm({
+                <textarea rows={4} name="description"  className='border border-gray-300 rounded outline-none py-2 px-2 focus:border-emerald-500'  onChange={(e) => {setInfoForm({
                   ...infoForm,
-                  bio:e.target.value 
+                  description:e.target.value 
                 })}} />
               </div>
             </div>
@@ -137,20 +184,20 @@ const Create = () => {
           <div className='w-full space-y-2'>
             <div className=' bg-white rounded-md p-8'>
               <div className='flex flex-col space-y-1 mb-2'>
-                <label htmlFor="name" className='font-medium text-base'>Account Holder Name</label>
-                <input type="text" name="name" className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={name} onChange={InfoChange}/>
+                <label htmlFor="accountHolderName" className='font-medium text-base'>Account Holder Name</label>
+                <input type="text" name="accountHolderName" className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={accountHolderName} onChange={InfoChange}/>
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
-                <label htmlFor="contact" className='font-medium text-base'>Account Holder Email</label>
-                <input type="text" name="contact"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={contact} onChange={InfoChange} />
+                <label htmlFor="accountHolderEmail" className='font-medium text-base'>Account Holder Email</label>
+                <input type="text" name="accountHolderEmail"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={accountHolderEmail} onChange={InfoChange} />
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
-                <label htmlFor="name" className='font-medium text-base'>Bank Name</label>
-                <input type="text" name="name"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={name} onChange={InfoChange}/>
+                <label htmlFor="bankName" className='font-medium text-base'>Bank Name</label>
+                <input type="text" name="bankName"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={bankName} onChange={InfoChange}/>
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
-                <label htmlFor="contact" className='font-medium text-base'>Account Number</label>
-                <input type="text" name="contact"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={contact} onChange={InfoChange} />
+                <label htmlFor="accountNumber" className='font-medium text-base'>Account Number</label>
+                <input type="text" name="accountNumber"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={accountNumber} onChange={InfoChange} />
               </div>
             </div>
           </div>
@@ -166,26 +213,26 @@ const Create = () => {
           <div className='w-full space-y-2' >
             <div className=' bg-white rounded-md p-8'>
               <div className='flex flex-col space-y-1 mb-2'>
-                <label htmlFor="name" className='font-medium text-base'>Country</label>
-                <input type="text" name="name"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={name} onChange={InfoChange}/>
+                <label htmlFor="country" className='font-medium text-base'>Country</label>
+                <input type="text" name="country"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={country} onChange={InfoChange}/>
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
-                <label htmlFor="contact" className='font-medium text-base'>City</label>
-                <input type="text" name="contact"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={contact} onChange={InfoChange} />
+                <label htmlFor="city" className='font-medium text-base'>City</label>
+                <input type="text" name="city"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={city} onChange={InfoChange} />
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
                 <label htmlFor="name" className='font-medium text-base'>State</label>
-                <input type="text" name="name" className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={name} onChange={InfoChange}/>
+                <input type="state" name="state" className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={state} onChange={InfoChange}/>
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
-                <label htmlFor="contact" className='font-medium text-base'>ZIP</label>
-                <input type="text" name="contact" className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={contact} onChange={InfoChange} />
+                <label htmlFor="zip" className='font-medium text-base'>ZIP</label>
+                <input type="text" name="zip" className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={zip} onChange={InfoChange} />
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
                 <label  className='font-medium text-base'>Street Address</label>
-                <textarea rows={4} name="bio" className='border border-gray-300 rounded outline-none py-2 px-2 focus:border-emerald-500'  onChange={(e) => {setInfoForm({
+                <textarea rows={4} name="streetAddress" className='border border-gray-300 rounded outline-none py-2 px-2 focus:border-emerald-500'  onChange={(e) => {setInfoForm({
                   ...infoForm,
-                  bio:e.target.value 
+                  streetAddress:e.target.value 
                 })}} />
               </div>
             </div>
@@ -210,11 +257,11 @@ const Create = () => {
                 <input type="text" name="contact" className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={contact} onChange={InfoChange} />
               </div>
               <div className='flex flex-col space-y-1 mb-2'>
-                <label htmlFor="name" className='font-medium text-base'>Website</label>
-                <input type="text" name="name"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={name} onChange={InfoChange}/>
+                <label htmlFor="website" className='font-medium text-base'>Website</label>
+                <input type="text" name="website"  className='border border-gray-300 rounded outline-none py-4 px-4 focus:border-emerald-500'  value={website} onChange={InfoChange}/>
               </div>
               <div className=' mb-2'>
-                <button className='py-3  w-[12rem] rounded-md bg-emerald-600 text-gray-50 text-base font-medium '>Add new social profile</button>
+                <div className='py-3  w-[12rem] rounded-md bg-emerald-600 text-gray-50 text-base font-medium '>Add new social profile</div>
               </div>
             </div>
           </div>
@@ -223,7 +270,7 @@ const Create = () => {
         <div className='flex justify-end w-full my-8'>
             <button className='py-2 w-32 rounded-md bg-emerald-600 text-gray-50 text-sm font-medium '>Save</button>
         </div>
-      </div>
+      </form>
     </div>
   )
 }

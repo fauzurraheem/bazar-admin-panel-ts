@@ -10,6 +10,9 @@ import {AiOutlineDollarCircle} from 'react-icons/ai'
 import {BsShop} from 'react-icons/bs'
 import { useRouter } from 'next/router';
 import { NormalLoader } from '../components/loader/NormalLoader';
+import { useEffect } from 'react';
+import { Column } from '@ant-design/plots';
+import Chart from '../components/chart/Chart';
 
 
 interface Props {
@@ -44,6 +47,8 @@ const Home: NextPage = () => {
   if(loading){
     return <NormalLoader />
   }
+
+
 
   return (
     <div className='h-full'>
@@ -106,7 +111,10 @@ const Home: NextPage = () => {
             </div>
           </section>
           <section className='mt-12'>
-            <div className='h-32 bg-gray-300'></div>
+            <div className='bg-white py-6 px-2 rounded-md'>
+              <h1 className='mb-4'>Sales chart</h1>
+            <Chart />
+            </div>
           </section>
           <section className=' text-base text-gray-500 xl:grid grid-cols-2 xl:gap-4'>
             <div className='mt-12 bg-white rounded-md'>

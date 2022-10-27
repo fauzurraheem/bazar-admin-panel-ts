@@ -10,7 +10,7 @@ type Props = {
 
 const Layout = ({children}:Props) => {
   return (
-    <div className='h-screen overflow-y-auto bg-gray-100' >
+    <div className='h-screen overflow-y-auto bg-gray-50' >
         {/* <ToastContainer /> */}
         <Navbar />
         <Sidebar />
