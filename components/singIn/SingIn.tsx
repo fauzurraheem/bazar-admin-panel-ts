@@ -103,7 +103,7 @@ const SingIn:React.FC<Register> = ({setRegister}) => {
           <hr  className='w-[50%]'/>
         </div>
         <div className='my-2'>
-          <p className='text-base text-center'>Don't have any account? <span className='text-emerald-500 underline cursor-pointer' onClick={() => setRegister(true)}>Register as a Shop Owner</span></p>
+          <p className='text-base text-center'>Do not have any account? <span className='text-emerald-500 underline cursor-pointer' onClick={() => setRegister(true)}>Register as a Shop Owner</span></p>
         </div>
       </div>
       
